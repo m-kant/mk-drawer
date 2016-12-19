@@ -1,34 +1,30 @@
-mk-databridge
+mk-drawer
 ===============
 
-Databridge is a serialization jQuery plugin to read data from forms, and to set data to forms.
-Supports nested objects,
-boolean and array checkboxes,
-on fly data formatting and conversion.
-Works with any elements with attributes 'name' or 'data-name', including non-input elements.
+Drawer is a library-agnostic UI widget. CSS animated. Doesn't impose any constrains on drawer content.
 
-[Demo](http://mkant.ru/mink-js/mk-databridge)
+[Demo](http://mkant.ru/mink-js/mk-drawer)
 
 Including in browser
 ------------
 
 Include script into your page:
 ```HTML
-<script src="path/to/plugin/mk-databridge.min.js" ></script>
+<script src="path/to/plugin/mk-drawer.min.js" ></script>
 ```
 
 Basic usage
 -----------
 
-To set data call databridge with data object:
+To set data call drawer with data object:
 ```JavaScript
-$('.form-container').databridge(dataObject);
+$('.form-container').drawer(dataObject);
 ```
 
-To get data call databridge with no arguments:
+To get data call drawer with no arguments:
 ```JavaScript
-var dataObject = $('.form-container').databridge();
+var dataObject = $('.form-container').drawer();
 ```
 
-[Details and Demo](http://mkant.ru/mink-js/mk-databridge)
+[Details and Demo](http://mkant.ru/mink-js/mk-drawer)
 --------------------------------------------------------
