@@ -1,0 +1,117 @@
+/* 
+    Created on : Feb 10, 2015, 4:36:16 PM
+    Author     : m.kantemirov
+*/
+/* wrapper */
+.mk-drawer-wrapper {
+  position: absolute;
+  pointer-events: none;
+  right: 0px;
+  top: 0px;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.mk-drawer-wrapper * {
+  box-sizing: border-box;
+}
+.mk-drawer-overlay {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+.mk-drawer-overlay.mk-open {
+  pointer-events: auto;
+  display: block;
+  opacity: 1;
+}
+.mk-drawer-pouch {
+  max-width: 0;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin-left: 35px;
+  -webkit-transition: max-width 0.3s;
+  transition: max-width 0.3s;
+}
+/* BODY */
+.mk-drawer-body {
+  pointer-events: auto;
+  width: 100px;
+  height: 100%;
+  background-color: #ddd;
+  border-left: 1px solid #aaaaaa;
+}
+/* BUTTON trigger */
+.mk-drawer-trigger {
+  pointer-events: auto;
+  display: block;
+  position: absolute;
+  top: 20px;
+  left: 0px;
+  background-color: #ddd;
+  border: 1px solid #aaaaaa;
+  border-right-color: #ddd;
+  width: 36px;
+  height: 36px;
+  padding: 7.2px;
+  text-align: center;
+}
+/* sandwich icon */
+.mk-drawer-icon,
+.mk-drawer-icon:before,
+.mk-drawer-icon:after {
+  background-color: #555;
+  display: block;
+  width: 100%;
+  height: 3px;
+  -webkit-transition: top 0.4s, -webkit-transform 0.4s;
+  transition: top 0.4s, -webkit-transform 0.4s;
+  transition: transform 0.4s, top 0.4s;
+  transition: transform 0.4s, top 0.4s, -webkit-transform 0.4s;
+}
+.mk-drawer-icon {
+  position: relative;
+  top: -7.2px;
+}
+.mk-drawer-icon:before,
+.mk-drawer-icon:after {
+  content: '';
+  position: absolute;
+  top: 7.2px;
+  left: 0px;
+}
+.mk-drawer-icon:after {
+  top: 14.4px;
+}
+.mk-drawer-icon:before {
+  -webkit-transition: width 0.2s;
+  transition: width 0.2s;
+}
+.mk-open {
+  /* cross icon, when drawer is opened */
+}
+.mk-open .mk-drawer-pouch {
+  max-width: 100px;
+}
+.mk-open .mk-drawer-icon {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  top: 0;
+}
+.mk-open .mk-drawer-icon:before {
+  width: 0;
+}
+.mk-open .mk-drawer-icon:after {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+  top: 0;
+}
