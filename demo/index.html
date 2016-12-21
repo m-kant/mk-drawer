@@ -19,61 +19,219 @@
 	<link rel="stylesheet" href="../dist/mk-drawer.css">
 	<script charset='UTF-8' src='../dist/mk-drawer.js'></script>
 
+	<!-- helpers -->
+	<link rel="stylesheet" href="components/styles.css">
 	<title>mk.drawer Demo</title>
 </head>
 
 <body>
 
 <div class="container">
-<div id="topNavEl"></div>
+	<div id="topNavEl"></div>
 
-<h1>mk.drawer demo</h1>
+	<h1>mk.drawer</h1>
+
+	<p>A library agnostic, fully customizable, CSS animated, mobile friendly UI widget. You can attach it to any block. You can place it on
+	any side. You can change view of trigger button, or assign any other element as a trigger.</p>
 	<div>
-		<p>mk.drawer is a library agnostic UI wdget. You have to point to DOM element,
-		that will be treated as a drawer. It will be wrapped by appropriate elements
-		and remains in the same container</p>
-		<pre>
-&lt;div class='drawer-container-element'>
-	some content can be placed here...
+		<a class="btn btn-default" href="https://github.com/m-kant/mk-drawer">Download from GIT Hub</a>
+		<a class="btn btn-default" href="https://www.npmjs.com/package/mk-drawer">Download as NPM package</a>
+	</div>
+	<h2>Inclusion</h2>
+	<p>Include script and style sheet into you page:</p>
+	<pre>&#60;script src="path/to/plugin/mk-drawer.min.js">&#60;/script>
+&#60;link href="path/to/plugin/mk-drawer.min.css" rel="stylesheet"></pre>
 
-	&lt;div id='drawerElement'>
-		content of the drawer
-	&lt;/div>
-	&lt;script>
-		mk.drawer.create( document.getElementById('drawerElement') );
-	&lt;/script>
-&lt;/div>
-</pre>
+	<h2>Usage</h2>
+	<pre>var drawer = new mk.drawer(content);</pre>
+	<pre>var drawer = new mk.drawer(options);</pre>
+	<pre>var drawer = new mk.drawer(content,options);</pre>
+	<p><b>Content</b> can be a HTML-string or DOM Element.
+	If string given, drawer will be attached to document body. If DOM Element given, drawer will
+	be attached to its parent node.</p>
+	<p><b>Options</b> is a set of drawer options</p>
 
+	<h2>Options</h2>
+	<p>	</p>
+	<table width='100%' class='table table-striped'>
+		<tr><th>option</th><th>default</th><th>description</th></tr>
+		<tbody>
+			<tr><td>width</td><td>200</td><td>width of drawer in pixels. If drawer attached to top or bottom, then it will be height of drawer.</td></tr>
+			<tr><td>attachment</td><td>left</td><td>Side of block, where drawer is located - 'top','bottom','left' or 'right'</td></tr>
+			<tr><td>content</td><td>null</td><td>HTML-string or DOM Element</td></tr>
+			<tr><td>container</td><td>null</td><td>Parent of drawer element. You can directly point to any element as a container. Otherwise it depends on content. If content is a string, then parent=document.body. If content is a DOM Element, then container is its parent node.</td></tr>
+			<tr><td>mask</td><td>true</td><td>If true, then when drawer is opened, underlying content will be overlapped by mask</td></tr>
+			<tr><td>class</td><td>null</td><td>user assigned CSS class of drawer</td></tr>
+			<tr><td>trigger</td><td>null</td><td>trigger button. If nothing is set, then trigger will be a squared button attached to drawer.</td></tr>
+			<tr><td>triggerOffset</td><td>20</td><td>standard trigger offset in pixels according to drawer corner</td></tr>
+			<tr><td>triggerAttachment</td><td>top</td><td>point of origin for trigger offset - 'top','bottom','left' or 'right'</td></tr>
+			<tr><td>triggerContent</td><td>&nbsp;</td><td>html code inside standard trigger button, by default is a sandwich icon.</td></tr>
+		</tbody>
+	</table>
 
-		<div style='height:200px; border:1px solid gray;'>
-			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-			<div id="drawerEl2" style="padding: 5px;margin: 0px;">
-				Here is element-attached drawer.
+	<h2>Examples</h2>
+	<p>Drawers madness</p>
+		<div class="demo-box" id='box1'>
+			<div class="demo-content">
+				<p>Here is a <button id="secretTriggerEl">trigger</button> for secret drawer. This drawer has no standard trigger button,
+				because alternative trigger element given.</p>
+				<p>'C' drawer has optional css class added for alternative styling. </p>
+				<p>Drawer instance has methods '<b>open</b>', '<b>close</b>' and '<b>toggle</b>'. To open drawer call <button onclick="drC.toggle();">drawer.open()</button>.
+				Thus you can combine standard trigger and additional control elements.</p>
+				<p>Bottom drawer has no mask. </p>
 			</div>
 		</div>
 
-		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-	</div>
+	<p>
+<pre style='height:300px;'>
+// body drawer (at left top corner of the page)
+new mk.drawer(contentEl.innerHTML);
+
+// left drawer
+new mk.drawer(
+	contentEl.innerHTML, // content as a string
+	{ container:box1 } // options
+);
+
+// secret drawer, only options given
+new mk.drawer({
+	content:contentEl.innerHTML,
+	container:box1,
+	trigger: secretTriggerEl
+});
+
+// top A drawer
+new mk.drawer({
+	content:contentEl.innerHTML,
+	container:box1,
+	attachment:'top',
+	width:50,
+	triggerAttachment:'right', // count trigger offset from right corner
+	triggerOffset:200,
+	triggerContent:'A'
+});
+
+// top B drawer
+new mk.drawer({
+	content:contentEl.innerHTML,
+	container:box1,
+	attachment:'top',
+	width:50,
+	triggerAttachment:'right',
+	triggerOffset:150,
+	triggerContent:'B'
+});
+
+// top C drawer,
+// remember instance to control drawer through javascript
+var drC = new mk.drawer({
+	content:contentEl.innerHTML,
+	container:box1,
+	attachment:'top',
+	class:'inverse', // user defined css class for alternative styling
+	width:50,
+	triggerAttachment:'right',
+	triggerOffset:100,
+	triggerContent:'C'
+});
+
+// bottom
+new mk.drawer({
+	content:contentEl.innerHTML,
+	container:box1,
+	attachment:'bottom',
+	mask:false,
+	width:100
+});
+
+// right drawer
+new mk.drawer({
+	content:contentEl.innerHTML,
+	container:box1,
+	attachment: 'right',
+	triggerAttachment: 'bottom'
+});
+	</pre>
+	</p>
+
 
 
 
 </div><!--.container-->
 
-<div id="drawerEl" style="padding: 5px;margin: 0px;">
-	Here is any kind of drawer content: comments, <button>buttons</button>, <a href='#'>links</a> or menus.
-	<ul>
-		<li>item 1</li>
-		<li>item 2</li>
-		<li>item 3</li>
-		<li>item 4</li>
-		<li>item 5</li>
-	</ul>
+<div id="contentEl" style="display:none;">
+	<div style="padding: 5px;margin: 0px;">
+		Put any kind of content here: comments, <button>buttons</button>, <a href='#'>links</a>, lists or menus.
+		<ul>
+			<li>item 1</li>
+			<li>item 2</li>
+			<li>item 3</li>
+		</ul>
+	</div>
 </div>
 
 <script>
-	mk.drawer.create(drawerEl,{class:'myClass',overlay:true});
-	mk.drawer.create(drawerEl2,{class:'myClass',overlay:true});
+
+// body drawer (at top left corner of the page)
+new mk.drawer(contentEl.innerHTML);
+// left drawer
+new mk.drawer(
+	contentEl.innerHTML, // content as a string
+	{ container:box1 } // options
+);
+// secret drawer
+new mk.drawer({
+	content:contentEl.innerHTML,
+	container:box1,
+	trigger: secretTriggerEl
+});
+// top A drawer
+new mk.drawer({
+	content:contentEl.innerHTML,
+	container:box1,
+	attachment:'top',
+	width:50,
+	triggerAttachment:'right', // count trigger offset from right corner
+	triggerOffset:200,
+	triggerContent:'A'
+});
+// top B drawer
+new mk.drawer({
+	content:contentEl.innerHTML,
+	container:box1,
+	attachment:'top',
+	width:50,
+	triggerAttachment:'right',
+	triggerOffset:150,
+	triggerContent:'B'
+});
+// top C drawer, remember instance to control
+// drawer through javascript
+drC = new mk.drawer({
+	content:contentEl.innerHTML,
+	container:box1,
+	attachment:'top',
+	class:'inverse', // user defined css class for alternative styling
+	width:50,
+	triggerAttachment:'right',
+	triggerOffset:100,
+	triggerContent:'C'
+});
+// bottom
+new mk.drawer({
+	content:contentEl.innerHTML,
+	container:box1,
+	attachment:'bottom',
+	mask:false,
+	width:100
+});
+// right drawer
+new mk.drawer({
+	content:contentEl.innerHTML,
+	container:box1,
+	attachment: 'right',
+	triggerAttachment: 'bottom'
+});
 
 </script>
 </body>

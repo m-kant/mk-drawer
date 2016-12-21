@@ -1,0 +1,50 @@
+@drawer-trigger-margin: 8px; // relative to trigger button borders
+@drawer-sandwich-size: @drawer-trigger-size - @drawer-trigger-margin*2;
+
+.drawer-sandwich{
+	@color: darken(@drawer-ln,50%);
+	@line-width: 2px;
+
+	pointer-events: none;
+	position:relative;
+	width:@drawer-sandwich-size;
+	height:@drawer-sandwich-size;
+	margin:@drawer-trigger-margin;
+	transition: transform .5s;
+
+	.bar1,.bar2,.bar3{
+		display: block;
+		position: absolute;
+		left:0;
+		width: 100%;
+		height: @line-width;
+		background-color: @color;
+		transition: transform .5s, width .5s;
+	}
+	.bar1{
+		top:0;
+	}
+	.bar2{
+		top:(@drawer-sandwich-size - @line-width)/2;
+	}
+	.bar3{
+		bottom:0;
+	}
+
+}
+
+.opened .drawer-sandwich{
+	@offset: @drawer-sandwich-size/3.2;
+
+	transform: rotate(-270deg);
+	.bar1{
+		transform: rotate(45deg) translate( @offset, @offset );
+	}
+	.bar2{
+		width:0;
+		transform: translate( @drawer-sandwich-size/2 );
+	}
+	.bar3{
+		transform: rotate(-45deg) translate( @offset, -1*@offset );
+	}
+}

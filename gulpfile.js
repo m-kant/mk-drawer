@@ -21,7 +21,10 @@ gulp.task('js', function() {
 		.pipe(gulp.dest('dist/'));
 });
 gulp.task('styles', function() {
-	return gulp.src('src/mk-drawer.less',{since:gulp.lastRun('styles')})
+	return gulp.src(
+			'src/mk-drawer.less'
+		//	,{since:gulp.lastRun('styles')}
+		)
 		//.pipe(newer('dist/mk-drawer.css'))
 		.pipe(less())
 		.pipe(prefix())

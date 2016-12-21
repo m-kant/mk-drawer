@@ -1,0 +1,32 @@
+body,html{
+	position: relative;
+	height: 100%;
+}
+
+.demo-box{
+	position:relative;
+	height:250px;
+	border:1px solid gray;
+	padding: 0;
+	border-radius: 3px;
+}
+.demo-content{
+	height:100%;
+	padding: 40px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+.drawer-trigger{
+	font-size: 26px;
+	line-height: 32px
+}
+
+.inverse .drawer-trigger,
+.inverse .drawer{
+	background-color: #000;
+	color:#fff;
+}
+.opened.inverse.drawer-mask{
+	background-color: rgba(128,128,255,.8);
+}

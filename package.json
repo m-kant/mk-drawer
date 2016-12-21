@@ -5,10 +5,13 @@
 	"url":"http://mkant.ru"
   },
   "name": "mk-drawer",
-  "description": "UI widget, a pane sliding from aside",
+  "description": "A library agnostic, mobile friendly UI widget",
   "keywords": [
     "UI",
-	"Widget",
+	"widget",
+	"drawer",
+	"mobile",
+	"mobile friendly",
 	"CSS animation"
   ],
   "version": "1.0.0",

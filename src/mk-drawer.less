@@ -1,126 +1,129 @@
-/*
-    Created on : Feb 10, 2015, 4:36:16 PM
-    Author     : m.kantemirov
-*/
+@drawer-bg:#eee;
+@drawer-ln:#ccc;
+@drawer-overlay-bg:rgba(0,0,0,.8);
+@drawer-trigger-size: 32px;
+@drawer-trigger-bg: @drawer-bg;
+@drawer-trigger-ln: @drawer-ln;
 
-@drawer-body-size:100px;
-@drawer-body-fill:100%;
-@drawer-trigger-size:36px;
-@trigger-offset: 20px;
-@drawer-bgcolor:#ddd;
-@drawer-lncolor:darken(@drawer-bgcolor,20%);
 
-/* wrapper */
-.mk-drawer-wrapper{
-	position: absolute;
-	pointer-events: none;
-	right:0px;
-	top:0px;
-	height: 100%;
-	box-sizing: border-box;
-	overflow-x: hidden;
-	overflow-y: auto;
-
-	& *{
-		box-sizing: border-box;
-	}
+.drawer-overlay, .drawer-overlay *{
+	box-sizing: content-box;
 }
-.mk-drawer-overlay{
-	position: absolute;
+
+.drawer-overlay{
 	pointer-events: none;
-	top:0;
-	left:0;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(0,0,0,0.7);
-	opacity: 0;
-	transition: opacity 0.3s;
-
-	&.mk-open{
-		pointer-events: auto;
-		display: block;
-		opacity: 1;
-	}
-}
-
-.mk-drawer-pouch{
-	//max-width: @drawer-body-size;
-	max-width: 0;
-	height: @drawer-body-fill;
-	overflow-x: hidden;
-	overflow-y: auto;
-	margin-left:@drawer-trigger-size - 1;
-	transition: max-width 0.3s;
-}
-
-/* BODY */
-.mk-drawer-body{
-	pointer-events: auto;
-	width:@drawer-body-size;
-	height: 100%;
-	background-color: @drawer-bgcolor;
-	border-left: 1px solid @drawer-lncolor;
-}
-
-
-/* BUTTON trigger */
-.mk-drawer-trigger{
-	pointer-events: auto;
-	display: block;
 	position: absolute;
-	top: @trigger-offset;
-	left: 0px;
-	background-color: @drawer-bgcolor;
-	border: 1px solid @drawer-lncolor;
-	border-right-color: @drawer-bgcolor;
-	width: @drawer-trigger-size;
-	height: @drawer-trigger-size;
-	padding: @drawer-trigger-size/5;
-	text-align: center;
+	top:0;
+	left:0;
+	background-color: transparent;
+	overflow:hidden;
+
+	&.drawer-mask{
+		transition: background-color .3s;
+	}
+	&.opened{
+		z-index: 1000;
+		&.drawer-mask{
+			pointer-events: auto;
+			background-color: @drawer-overlay-bg;
+			z-index: 1000;
+		}
+	}
+
 }
-/* sandwich icon */
-.mk-drawer-icon,
-.mk-drawer-icon:before,
-.mk-drawer-icon:after{
-	background-color: #555;
-	display: block;
+
+.drawer{
+	pointer-events: auto;
+	background-color:@drawer-bg;
+	position: absolute;
+	transition: transform .3s;
+}
+.opened .drawer{
+	transform: translate(0,0) !important;
+}
+.drawer-body{
+	position: absolute;
+	top:0;
+	right:0;
 	width:100%;
-	height:3px;
-	transition: transform 0.4s, top 0.4s;
+	height:100%;
+	overflow: auto;
 }
-.mk-drawer-icon{
-	position: relative;
-	top:-1*@drawer-trigger-size/5;
-}
-.mk-drawer-icon:before,
-.mk-drawer-icon:after{
-	content: '';
+.drawer-trigger{
+	width:@drawer-trigger-size;
+	height:@drawer-trigger-size;
+	background-color:@drawer-trigger-bg;
+	border:1px solid @drawer-trigger-ln;
 	position: absolute;
-	top:@drawer-trigger-size/5;
-	left:0px;
-}
-.mk-drawer-icon:after{
-	top:2*@drawer-trigger-size/5;
-}
-.mk-drawer-icon:before{
-	transition: width 0.2s;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	color: inherit;
+
+	&:hover{
+		text-decoration: none;
+		color: inherit;
+	}
 }
 
-.mk-open{
-	.mk-drawer-pouch{
-		max-width: @drawer-body-size;
-	}
-
-	/* cross icon, when drawer is opened */
-	.mk-drawer-icon{
-		transform: rotate(45deg);
+// DIFFERENT ATTACHMENTS
+.drawer-right{
+	.drawer{
+		width:100px;
+		height:100%;
+		border-left:1px solid @drawer-ln;
+		right:0;
 		top:0;
+		transform: translateX(100%);
 	}
-	.mk-drawer-icon:before{
-		width:0;
-	}
-	.mk-drawer-icon:after{
-		transform: rotate(90deg);
-		top:0;
+	.drawer-trigger{
+		border-right: none;
+		left: -1*(@drawer-trigger-size + 1) ;
 	}
 }
+.drawer-left{
+	.drawer{
+		width:100px;
+		height:100%;
+		border-right:1px solid @drawer-ln;
+		left:0;
+		top:0;
+		transform: translateX(-100%);
+	}
+	.drawer-trigger{
+		border-left: none;
+		right: -1*(@drawer-trigger-size + 1) ;
+	}
+}
+.drawer-top{
+	.drawer{
+		width:100%;
+		height:100px;
+		border-bottom:1px solid @drawer-ln;
+		left:0;
+		top:0;
+		transform: translateY(-100%);
+	}
+	.drawer-trigger{
+		border-top: none;
+		bottom: -1*(@drawer-trigger-size + 1) ;
+	}
+}
+.drawer-bottom{
+	.drawer{
+		width:100%;
+		height:100px;
+		border-top:1px solid @drawer-ln;
+		left:0;
+		bottom:0;
+		transform: translateY(100%);
+	}
+	.drawer-trigger{
+		border-bottom: none;
+		top: -1*(@drawer-trigger-size + 1) ;
+	}
+}
+
+@import "mk-drawer-sandwich.less";
