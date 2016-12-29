@@ -29,7 +29,9 @@ var drawer = new mk.drawer(options);
 var drawer = new mk.drawer(content,options);
 ```
 
-Content can be a HTML-string or DOM Element. If string given, drawer will be attached to document body. If DOM Element given, drawer will be attached to its parent node.
+Content can be a HTML-string or DOM Element.
+If string given, drawer will be attached to document body.
+If DOM Element given, drawer will be attached to its parent node.
 
 Options is a set of drawer options
 
